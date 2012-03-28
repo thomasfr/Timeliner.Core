@@ -1,4 +1,5 @@
 .idea/
 tmp/*
 log/*
+.DS_Store
 node_modulkes/*
