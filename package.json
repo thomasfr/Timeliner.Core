@@ -11,6 +11,8 @@
         "redis":"latest",
         "underscore":"latest",
         "natural":"latest",
+        "hiredis":"latest",
+        "redis":"latest",
         "konsole":"latest"
     },
     "devDependencies":{},
