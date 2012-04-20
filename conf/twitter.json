@@ -6,6 +6,6 @@
         "Content-Type": "application/x-www-form-urlencoded",
         "Accept":       "*/*"
     },
-    "auth":    "thomasf:pommes84",
+    "auth":    "user:pass",
     "method":  "POST"
 }
