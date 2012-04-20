@@ -1,0 +1,11 @@
+{
+    "host":    "stream.twitter.com",
+    "path":    "/1/statuses/filter.json",
+    "port":    443,
+    "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept":       "*/*"
+    },
+    "auth":    "thomasf:pommes84",
+    "method":  "POST"
+}

@@ -13,7 +13,11 @@
         "natural":"latest",
         "hiredis":"latest",
         "redis":"latest",
-        "konsole":"latest"
+        "konsole":"latest",
+				"async":"latest",
+				"step":"latest",
+				"express":"latest",
+				"ws":"latest"
     },
     "devDependencies":{},
     "optionalDependencies":{},
