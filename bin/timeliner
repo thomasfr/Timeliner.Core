@@ -1,0 +1,81 @@
+#!/bin/bash
+TIMELINER_HOME="$(cd $(dirname $(dirname $0));pwd)";
+cd $TIMELINER_HOME;
+
+TIMELINER_BIN="${TIMELINER_HOME}/bin";
+TIMELINER_CONF="${TIMELINER_HOME}/conf";
+TIMELINER_LOG="${TIMELINER_HOME}/log";
+TIMELINER_TMP="${TIMELINER_HOME}/tmp";
+TIMELINER_LIB="${TIMELINER_HOME}/lib";
+TIMELINER_LOG_FILE="${TIMELINER_LOG}/timeliner.log";
+TIMELINER_PID_FILE="${TIMELINER_TMP}/timeliner.pid";
+TIMELINER_REDIS_SOCK_FILE="${TIMELINER_TMP}/redis.sock";
+TIMELINER_REDIS_LOG_FILE="${TIMELINER_LOG}/redis.log";
+TIMELINER_REDIS_PID_FILE="${TIMELINER_TMP}/redis.pid";
+TIMELINER_REDIS_CONF_FILE="${TIMELINER_CONF}/redis.conf";
+
+NODE_ENV="development";
+
+## Allow to ship own set of binaries with Sonr.
+## If there is no arch dir within the bin dir
+## there are no symlinks created
+if [[ -d "$TIMELINER_BIN" && -r "$TIMELINER_BIN" ]]; then
+  CPUARCH="$(uname -m)";
+  if [ ${CPUARCH} != "x86_64" ]; then
+    echo "Not supported CPU architecture";
+    exit -1;
+  fi
+  HOSTPLATFORM="$(uname -s)";
+  if [[ ${HOSTPLATFORM} != "Linux" && ${HOSTPLATFORM} != "Darwin" ]]; then
+    echo "Not supported host plattform";
+    exit -1;
+  fi
+  export PATH="${TIMELINER_BIN}:${PATH}";
+  cd $TIMELINER_BIN;
+  BINDIR_NAME="${HOSTPLATFORM}-${CPUARCH}"
+  if [[ -d "${TIMELINER_BIN}/${BINDIR_NAME}"  && -r "${TIMELINER_BIN}/${BINDIR_NAME}" ]];then
+    ln -sf ${BINDIR_NAME}/* ./;
+  fi
+fi
+
+cd $TIMELINER_HOME;
+
+
+## START
+if [[ "start" == "$1" ]]; then
+
+	if [[ -f $TIMLINER_PID_FILE || -f $TIMELINER_REDIS_PID_FILE ]] ; then
+    echo "TIMELINER already running? Remove '$TIMELINER_PID_FILE' and '$TIMLINER_REDIS_PID_FILE' and try again. Exiting."
+    exit 1;
+  fi
+
+	echo " * Starting redis-server";
+	nohup env -i "PATH=$PATH" "HOME=$HOME" "USER=$USER" redis-server "${TIMELINER_REDIS_CONF_FILE}" &> "${TIMELINER_REDIS_LOG_FILE}" &
+	#env -i "PATH=$PATH" "HOME=$HOME" "USER=$USER" redis-server "${TIMELINER_REDIS_CONF_FILE}"
+	echo $! >> "${TIMELINER_REDIS_PID_FILE}";
+
+	echo " * Starting Timeliner";
+	#nohup env -i "NODE_ENV=$NODE_ENV" "PATH=$PATH" "TIMELINER_HOME=$TIMELINER_HOME" "HOME=$HOME" "USER=$USER" node $TIMELINER_HOME &> "${TIMELINER_LOG_FILE}" &
+	env -i "NODE_ENV=$NODE_ENV" "PATH=$PATH" "TIMELINER_HOME=$TIMELINER_HOME" "HOME=$HOME" "USER=$USER" node $TIMELINER_HOME	
+	echo $! >> "${TIMELINER_PID_FILE}"
+
+## STOP
+elif [[ "stop" == "$1" ]]; then
+  if [[ -f $TIMELINER_PID_FILE ]]; then
+    TIMELINER_PID="$(cat $TIMELINER_PID_FILE)";
+    echo " * Killing Timeliner ($TIMELINER_PID)";
+    kill $TIMELINER_PID;
+    rm  -f "${TIMELINER_PID_FILE}";
+  else
+    echo "Timeliner not running";
+  fi
+  if [[ -f $TIMELINER_REDIS_PID_FILE ]]; then
+    TIMELINER_REDIS_PID="$(cat $TIMELINER_REDIS_PID_FILE)";
+    echo " * Killing redis-server ($TIMELINER_REDIS_PID)";
+    kill $TIMELINER_REDIS_PID;
+    rm -f "${TIMELINER_REDIS_PID_FILE}";
+  else
+    echo "redis-server not running";
+  fi
+  exit 0;
+fi

@@ -39,24 +39,23 @@ req.on('response', function (res) {
             rawTweet = JSON.parse(chunk);
             if (rawTweet) {
                 konsole.info("#" + (++sentTweets) + ": new tweet matching pattern: '" + pattern + "'");
-                sendDocument(rawTweet);
-                var tweet = JSON.parse(rawTweet);
-                tweet.user = JSON.stringify(tweet.user) || null;
-                tweet.entities = JSON.stringify(tweet.entities) || null;
-                tweet.place = JSON.stringify(tweet.place) || null;
-                clientDb1.hmset('T:' + tweet.id, tweet);
+								sendDocument(rawTweet);
+                rawTweet.user = JSON.stringify(rawTweet.user) || null;
+                rawTweet.entities = JSON.stringify(rawTweet.entities) || null;
+                rawTweet.place = JSON.stringify(rawTweet.place) || null;
+								clientDb1.hmset('T:' + rawTweet.id, rawTweet);
             }
         } catch (error) {
-            console.trace();
-            konsole.warn(error);
+            //console.trace();
+            //konsole.warn(error);
         }
         rawTweet = null;
     });
 });
 
 req.on('error', function (e) {
-    console.trace();
-    konsole.warn(e);
+    //console.trace();
+    //konsole.warn(e);
 });
 
 req.setTimeout(0);
