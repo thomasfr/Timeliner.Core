@@ -15,6 +15,80 @@ Installation
 npm install Timeliner.Core
 ```
 
+Usage
+=====
+
+```javascript
+## example/example-tokenizeText1.js:
+var Core = require('Timeliner.Core').tokenizeText;
+var dummyText = "This is an example text. It will create some strings, let`s say tokens. This Tokens are generated via stemming, singularizing and calculating phonetic strings for every word. This is done through the wonderful and excellent 'natural' module by chris umbel!";
+tokenizeText(dummyText, function (error, tokens) {
+    console.log(tokens);
+});
+```
+
+Will Output:
+```json
+[ 'AFR',
+  'AKSMPL',
+  'AKSSL',
+  'AKSSLNT',
+  'AL',
+  'ANT',
+  'ANTRFL',
+  'CALC',
+  'CALCULATING',
+  'CHRI',
+  'CHRIS',
+  'CHRY',
+  'CRE',
+  'CREATE',
+  'DON',
+  'DONE',
+  'EVERY',
+  'EXAMPL',
+  'EXAMPLE',
+  'EXCEL',
+  'EXCELLENT',
+  'FL',
+  'FNT',
+  'FNTK',
+  'FNTRFL',
+  'GEN',
+  'GENERATED',
+  'KLK',
+  'KLKLTNK',
+  'KN',
+  'KNRTT',
+  'KR',
+  'KRT',
+  'MOD',
+  'MODULE',
+  'MT',
+  'MTL',
+  'PHONET',
+  'PHONETIC',
+  'SAY',
+  'SINGUL',
+  'SINGULARIZING',
+  'SNKL',
+  'SNKLRSNK',
+  'STRING',
+  'STRINGS',
+  'STRNK',
+  'TK',
+  'TKN',
+  'TN',
+  'TOK',
+  'TOKEN',
+  'TOKENS',
+  'VIA',
+  'WIL',
+  'WILL',
+  'WOND',
+  'WONDERFUL' ]
+``
+
 LICENSE
 =======
 
