@@ -1,27 +1,27 @@
 {
-    "author":"Thomas Fritz <fritztho@gmail.com> (http://fritzthomas.com)",
-    "name":"redis-timeline-search",
-    "version":"0.0.1",
-    "repository":{
-        "url":""
+    "author": "Thomas Fritz <fritztho@gmail.com> (http://fritzthomas.com)",
+    "description": "Base module for Timeliner.Index and Timeliner.Search.",
+    "name": "Timeliner.Core",
+    "version": "0.0.1",
+    "homepage": "https://github.com/thomasfr/Timeliner.Core",
+    "scripts": {
+        "test": "make test"
     },
-    "main":"index.js",
-    "dependencies":{
-        "hiredis":"latest",
-        "redis":"latest",
-        "underscore":"latest",
-        "natural":"latest",
-        "hiredis":"latest",
-        "redis":"latest",
-        "konsole":"latest",
-				"async":"latest",
-				"step":"latest",
-				"express":"latest",
-				"ws":"latest"
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/thomasfr/Timeliner.Core.git"
     },
-    "devDependencies":{},
-    "optionalDependencies":{},
-    "engines":{
-        "node":"*"
-    }
+    "dependencies": {
+        "underscore": "latest",
+        "natural": "latest",
+        "async": "latest"
+    },
+    "engines": {
+        "node": "~0.6.0"
+    },
+    "devDependencies": {
+        "mocha": "latest",
+        "should": "latest"
+    },
+    "optionalDependencies": {}
 }
