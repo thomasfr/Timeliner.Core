@@ -2,7 +2,7 @@
     "author": "Thomas Fritz <fritztho@gmail.com> (http://fritzthomas.com)",
     "description": "Base module for Timeliner.Index and Timeliner.Search.",
     "name": "Timeliner.Core",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "homepage": "https://github.com/thomasfr/Timeliner.Core",
     "scripts": {
         "test": "make test"
