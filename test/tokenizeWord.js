@@ -54,7 +54,6 @@ describe('#tokenizeWord', function () {
     it('should return correct tokens when given a dash delimited word', function (done) {
         Core.tokenizeText(dashedWord, function (error, tokens) {
             should.not.exist(error);
-            // [ 'NAT', 'NATIONAL', 'NT', 'NXNL', 'SEC', 'SECURITY', 'SK', 'SKRT' ]
             tokens[0].should.equal('NAT');
             tokens[1].should.equal('NATIONAL');
             tokens[2].should.equal('NT');
@@ -69,7 +68,7 @@ describe('#tokenizeWord', function () {
     it('should not return any tokens when a word with special chars is given', function (done) {
         Core.tokenizeText(specialChar, function (error, tokens) {
             should.not.exist(error);
-            console.log(tokens);
+            tokens.should.be.an.instanceOf(Array).and.have.lengthOf(0);
             done();
         });
     });
