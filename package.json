@@ -1,16 +1,15 @@
 {
     "author": "Thomas Fritz <fritztho@gmail.com> (http://fritzthomas.com)",
-    "description": "Base file for all Timeliner modules. Like Timeliner-Index or Timeliner-Search.",
-    "name": "Timeliner-Core",
+    "description": "Base module for Timeliner.Index and Timeliner.Search.",
+    "name": "Timeliner.Core",
     "version": "0.0.1",
-    "homepage": "https://github.com/thomasfr/Timeliner-Core",
+    "homepage": "https://github.com/thomasfr/Timeliner.Core",
     "scripts": {
-        "test": "make test",
-        "doc": "make docs"
+        "test": "make test"
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/thomasfr/Timeliner-Core.git"
+        "url": "git://github.com/thomasfr/Timeliner.Core.git"
     },
     "dependencies": {
         "underscore": "latest",
