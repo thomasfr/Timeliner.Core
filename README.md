@@ -19,7 +19,7 @@ Usage
 =====
 
 ```javascript
-## example/example-tokenizeText1.js:
+// example/example-tokenizeText1.js:
 var Core = require('Timeliner.Core').tokenizeText;
 var dummyText = "This is an example text. It will create some strings, let`s say tokens. This Tokens are generated via stemming, singularizing and calculating phonetic strings for every word. This is done through the wonderful and excellent 'natural' module by chris umbel!";
 tokenizeText(dummyText, function (error, tokens) {
@@ -27,7 +27,9 @@ tokenizeText(dummyText, function (error, tokens) {
 });
 ```
 
-Will Output:
+This will ouput:
+----------------
+
 ```json
 [ 'AFR',
   'AKSMPL',
