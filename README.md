@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/thomasfr/Timeliner.Core.png)](http://travis-ci.org/thomasfr/Timeliner.Core)
 Timeliner.Core
 ==============
 
